@@ -1,33 +1,91 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Andrew's Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrew's Website</title>
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(#021B3A,#0A7E8C);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+header{padding:80px 20px;}
+h1{font-size:60px;text-shadow:0 0 20px cyan;}
+.card{
+max-width:800px;
+margin:30px auto;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:20px;
+}
+a{
+display:inline-block;
+padding:12px 24px;
+background:#00b4d8;
+color:white;
+text-decoration:none;
+border-radius:10px;
+}
+.bubble{
+position:fixed;
+bottom:-50px;
+border-radius:50%;
+background:rgba(255,255,255,.25);
+animation:rise 12s linear infinite;
+}
+@keyframes rise{
+from{transform:translateY(0);}
+to{transform:translateY(-120vh);}
+}
+</style>
 </head>
-
 <body>
 
-    <h1>Welcome to My Website!</h1>
+<script>
+for(let i=0;i<35;i++){
+ let b=document.createElement('div');
+ b.className='bubble';
+ let s=Math.random()*20+10;
+ b.style.width=s+'px';
+ b.style.height=s+'px';
+ b.style.left=Math.random()*100+'vw';
+ b.style.animationDelay=(Math.random()*12)+'s';
+ document.body.appendChild(b);
+}
+</script>
 
-    <h2>About Me</h2>
+<header>
+<h1>🌊 Welcome to Andrew's Website 🌊</h1>
+<p>Future Programmer • AI Enthusiast • Athlete</p>
+</header>
 
-    <p>Hi! My name is Andrew. I'm learning HTML.</p>
+<div class="card">
+<h2>About Me</h2>
+<p>Hi! My name is Andrew. I'm learning HTML and building my first website on GitHub Pages.</p>
+</div>
 
-    <h2>My Interests</h2>
+<div class="card">
+<h2>My Interests</h2>
+<ul style="list-style:none;padding:0;font-size:22px;">
+<li>💻 Programming</li>
+<li>🤖 Artificial Intelligence</li>
+<li>🏀 Basketball</li>
+<li>🏌️ Golf</li>
+<li>🎬 Movies</li>
+</ul>
+</div>
 
-    <ul>
-        <li>Programming</li>
-        <li>Golf</li>
-        <li>Basketball</li>
-        <li>AI</li>
-    </ul>
+<div class="card">
+<h2>Favorite Website</h2>
+<a href="https://www.google.com" target="_blank">Visit Google</a>
+</div>
 
-    <h2>My Favorite Website</h2>
-
-    <a href="https://www.google.com" target="_blank">
-        Visit Google
-    </a>
+<p style="padding:30px;">Made by Andrew © 2026</p>
 
 </body>
-
 </html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrew's Legend Website</title>
+
+  <style>
+    :root {
+      --bg: #030712;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --blue: #38bdf8;
+      --purple: #a855f7;
+      --green: #22c55e;
+      --pink: #ec4899;
+      --glass: rgba(255, 255, 255, 0.09);
+      --border: rgba(255, 255, 255, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.32), transparent 28%),
+        radial-gradient(circle at 85% 8%, rgba(168, 85, 247, 0.35), transparent 27%),
+        radial-gradient(circle at 55% 90%, rgba(34, 197, 94, 0.25), transparent 30%),
+        linear-gradient(135deg, #020617, #0f172a 48%, #082f49);
+      z-index: -5;
+    }
+
+    .stars, .stars2 {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+      z-index: -4;
+    }
+
+    .stars {
+      background-size: 80px 80px, 140px 140px;
+      opacity: 0.28;
+      animation: starMove 50s linear infinite;
+    }
+
+    .stars2 {
+      background-size: 45px 45px, 100px 100px;
+      opacity: 0.13;
+      animation: starMove 28s linear infinite reverse;
+    }
+
+    @keyframes starMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(-350px); }
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,189,248,0.25), transparent 65%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(3, 7, 18, 0.66);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    a, button {
+      font-family: inherit;
+    }
+
+    nav a, .btn {
+      color: white;
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 15px;
+    }
+
+    nav a:hover, .btn:hover {
+      transform: translateY(-3px);
+      background: var(--blue);
+      color: #020617;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 8% 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--border);
+      color: #dbeafe;
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      font-size: clamp(52px, 8vw, 112px);
+      line-height: 0.92;
+      letter-spacing: -3px;
+      margin-bottom: 26px;
+      background: linear-gradient(90deg, #fff, var(--blue), var(--purple), var(--green));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 22px;
+      line-height: 1.7;
+      color: #dbeafe;
+      max-width: 730px;
+      margin-bottom: 30px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--blue), #818cf8);
+      color: #020617;
+      font-weight: 900;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 34px;
+      max-width: 720px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 29px;
+      color: var(--blue);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .portal {
+      min-height: 500px;
+      border-radius: 38px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 35px 100px rgba(0,0,0,0.52);
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    .portal h2 {
+      position: relative;
+      z-index: 5;
+      font-size: 34px;
+    }
+
+    .ring {
+      position: absolute;
+      inset: 75px;
+      border-radius: 50%;
+      border: 3px solid rgba(56,189,248,0.35);
+      box-shadow:
+        0 0 40px rgba(56,189,248,0.35),
+        inset 0 0 40px rgba(168,85,247,0.25);
+      animation: spin 12s linear infinite;
+    }
+
+    .ring::before, .ring::after {
+      content: "";
+      position: absolute;
+      inset: 36px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255,255,255,0.28);
+    }
+
+    .ring::after {
+      inset: 82px;
+      border-color: rgba(34,197,94,0.5);
+      animation: spin 7s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .orb.one { width: 125px; height: 125px; background: var(--blue); left: 55px; top: 95px; }
+    .orb.two { width: 190px; height: 190px; background: var(--purple); right: -40px; top: 155px; animation-delay: 1s; }
+    .orb.three { width: 110px; height: 110px; background: var(--green); left: 185px; bottom: 55px; animation-delay: 2s; }
+
+    @keyframes float {
+      50% { transform: translateY(-28px) scale(1.05); }
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 70px;
+      z-index: 6;
+      animation: swim 9s linear infinite;
+    }
+
+    .e1 { top: 125px; left: -100px; }
+    .e2 { top: 245px; left: -130px; animation-delay: 2s; }
+    .e3 { top: 360px; left: -150px; animation-delay: 4s; }
+
+    @keyframes swim {
+      to { transform: translateX(760px); }
+    }
+
+    section {
+      padding: 95px 8%;
+    }
+
+    .section-title {
+      font-size: clamp(38px, 5vw, 58px);
+      margin-bottom: 18px;
+      letter-spacing: -1.5px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 19px;
+      max-width: 780px;
+      line-height: 1.7;
+      margin-bottom: 34px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card, .big-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 75px rgba(0,0,0,0.27);
+    }
+
+    .card {
+      min-height: 245px;
+      padding: 32px;
+      border-radius: 28px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background: radial-gradient(circle, rgba(56,189,248,0.2), transparent 55%);
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 90px rgba(56,189,248,0.24);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 29px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .card p {
+      color: #dbeafe;
+      font-size: 18px;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .big-card {
+      border-radius: 32px;
+      padding: 42px;
+    }
+
+    .big-card h3 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .big-card p {
+      color: #dbeafe;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .game-box {
+      margin-top: 24px;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #score {
+      font-size: 38px;
+      margin-bottom: 18px;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 21px;
+      color: #bae6fd;
+    }
+
+    .progress-wrap {
+      margin-top: 20px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.13);
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--purple), var(--green));
+      border-radius: 999px;
+      transition: 0.3s;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 24px;
+      border-radius: 24px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+    }
+
+    .num {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #020617;
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .step h3 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 55px 8%;
+      text-align: center;
+      color: #cbd5e1;
+      border-top: 1px solid var(--border);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: 0.8s;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 950px) {
+      .hero, .showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .grid, .stats {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 190px;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .portal {
+        min-height: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-glow" id="glow"></div>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+
+  <nav>
+    <div class="logo">Andrew<span>.dev</span></div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#game">Game</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="badge">🌟 First website. Future legend mode unlocked.</span>
+        <h1>Andrew's Legend Website</h1>
+        <p>
+          A futuristic personal website about coding, AI, sports, creativity, and building awesome things on the internet.
+          This is not just a page — it is a launchpad.
+        </p>
+
+        <div class="button-row">
+          <a class="btn primary" href="#projects">Explore Projects</a>
+          <a class="btn" href="#skills">See Skills</a>
+          <button class="btn" onclick="surprise()">Surprise Me</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>HTML</strong><span>Website structure</span></div>
+          <div class="stat"><strong>CSS</strong><span>Design + animation</span></div>
+          <div class="stat"><strong>JS</strong><span>Interactive powers</span></div>
+        </div>
+      </div>
+
+      <div class="portal">
+        <h2>🌊 Ocean Space Portal</h2>
+        <div class="ring"></div>
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+        <div class="emoji e1">🐠</div>
+        <div class="emoji e2">🐬</div>
+        <div class="emoji e3">🚀</div>
+      </div>
+    </section>
+
+    <section id="about" class="reveal">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        This site is designed like a real landing page: big hero section, smooth animations,
+        glass cards, interactive buttons, and a mini game.
+      </p>
+
+      <div class="big-card">
+        <h3>Hi, I'm Andrew 👋</h3>
+        <p>
+          I'm learning how websites work with HTML, CSS, JavaScript, and GitHub Pages.
+          I like programming, AI, basketball, golf, games, and creative projects.
+          Every project makes me better.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <h2 class="section-title">What I'm Learning</h2>
+      <p class="section-subtitle">Three superpowers that make websites come alive.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>💻 HTML</h3>
+          <p>HTML creates the structure: headings, paragraphs, buttons, sections, links, and pages.</p>
+        </div>
+
+        <div class="card">
+          <h3>🎨 CSS</h3>
+          <p>CSS makes everything beautiful with color, spacing, animation, shadows, and responsive design.</p>
+        </div>
+
+        <div class="card">
+          <h3>⚡ JavaScript</h3>
+          <p>JavaScript adds interaction: games, popups, changing text, counters, effects, and logic.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h2 class="section-title">Project Ideas</h2>
+      <p class="section-subtitle">A website becomes cooler when it keeps growing.</p>
+
+      <div class="showcase">
+        <div class="big-card">
+          <h3>🏀 Basketball Stats</h3>
+          <p>A future page that tracks points, assists, rebounds, favorite players, and highlight moments.</p>
+          <br />
+          <button class="btn primary" onclick="changeMessage('🏀 Basketball project coming soon!')">Open Project</button>
+        </div>
+
+        <div class="big-card">
+          <h3>🤖 AI Lab</h3>
+          <p>A future page about artificial intelligence, robots, future inventions, and how machines learn.</p>
+          <br />
+          <button class="btn primary" onclick="changeMessage('🤖 AI Lab activated!')">Open Project</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="game" class="reveal">
+      <h2 class="section-title">Mini Game</h2>
+      <p class="section-subtitle">Click the button and try to reach 100% power.</p>
+
+      <div class="big-card">
+        <h3>Power Clicker 🎮</h3>
+        <p>Click to charge the website energy bar.</p>
+
+        <div class="game-box">
+          <h3 id="score">Power: 0</h3>
+          <button class="btn primary" onclick="addPoint()">Click +1</button>
+          <button class="btn" onclick="resetScore()">Reset</button>
+
+          <div class="progress-wrap">
+            <div class="progress" id="progress"></div>
+          </div>
+
+          <p id="message">Ready.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="reveal">
+      <h2 class="section-title">Coding Roadmap</h2>
+      <p class="section-subtitle">A simple path from beginner to builder.</p>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h3>Build the first website</h3>
+            <p>Upload index.html to GitHub Pages and make the site public.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h3>Add more pages</h3>
+            <p>Create separate pages for sports, AI, games, art, and coding projects.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h3>Learn real JavaScript</h3>
+            <p>Make calculators, games, quizzes, scoreboards, and interactive apps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made by Andrew © 2026 • Built with HTML, CSS, JavaScript, and GitHub Pages</p>
+  </footer>
+
+  <script>
+    let points = 0;
+
+    const glow = document.getElementById("glow");
+    document.addEventListener("mousemove", function(e) {
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
+    });
+
+    function addPoint() {
+      points++;
+      document.getElementById("score").textContent = "Power: " + points;
+
+      const progress = Math.min(points, 100);
+      document.getElementById("progress").style.width = progress + "%";
+
+      if (points === 10) {
+        document.getElementById("message").textContent = "🔥 Nice! Power level 10 reached!";
+      } else if (points === 25) {
+        document.getElementById("message").textContent = "🚀 Amazing! Rocket boost unlocked!";
+      } else if (points === 50) {
+        document.getElementById("message").textContent = "👑 Legendary! Halfway to full power!";
+      } else if (points === 100) {
+        document.getElementById("message").textContent = "🌟 FULL POWER! Website legend mode!";
+        confetti();
+      }
+    }
+
+    function resetScore() {
+      points = 0;
+      document.getElementById("score").textContent = "Power: 0";
+      document.getElementById("message").textContent = "Ready.";
+      document.getElementById("progress").style.width = "0%";
+    }
+
+    function surprise() {
+      const surprises = [
+        "🌊 Secret ocean mode discovered!",
+        "🚀 Future coder loading...",
+        "🤖 AI robot says hello!",
+        "🏀 Swish! Perfect shot!",
+        "🏌️ Hole in one!",
+        "👑 Andrew unlocked legend mode!"
+      ];
+
+      alert(surprises[Math.floor(Math.random() * surprises.length)]);
+    }
+
+    function changeMessage(text) {
+      document.getElementById("message").textContent = text;
+      location.hash = "#game";
+    }
+
+    function confetti() {
+      for (let i = 0; i < 60; i++) {
+        const piece = document.createElement("div");
+        piece.style.position = "fixed";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.top = "-20px";
+        piece.style.width = "10px";
+        piece.style.height = "14px";
+        piece.style.borderRadius = "3px";
+        piece.style.background = ["#38bdf8", "#a855f7", "#22c55e", "#ec4899", "#facc15"][Math.floor(Math.random() * 5)];
+        piece.style.zIndex = "9999";
+        piece.style.animation = "fall " + (Math.random() * 2 + 2) + "s linear forwards";
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 4200);
+      }
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

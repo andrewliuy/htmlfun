@@ -120,7 +120,7 @@
       <div class="game" id="guess"><h3>🔢 Number Guess</h3><p>Guess the secret number from 1 to 20.</p><div class="game-area"><input id="guessInput" type="number" placeholder="Enter 1-20"><button class="btn primary" onclick="checkGuess()">Guess</button><button class="btn" onclick="newNumber()">New Number</button><div class="score" id="guessMsg">Make a guess.</div></div></div>
       <div class="game" id="reaction"><h3>🎯 Reaction Target</h3><p>Click the moving target as many times as you can.</p><div class="game-area" id="targetBox" style="height:230px;position:relative;"><div class="score" id="targetScore">Hits: 0</div><div class="target" id="target" onclick="hitTarget()">🎯</div></div></div>
       <div class="game" id="memory"><h3>🧠 Memory Match</h3><p>Find all matching emoji pairs.</p><div class="game-area"><div class="memory-grid" id="memoryGrid"></div><br><button class="btn" onclick="startMemory()">Restart Memory</button><div class="score" id="memoryMsg">Matches: 0</div></div></div>
-      <div class="game" id="rps"><h3>✊ Rock Paper Scissors</h3><p>Beat the computer.</p><div class="game-area"><div class="button-row"><button class="btn" onclick="playRPS('rock')">✊ Rock</button><button class="btn" onclick="playRPS('paper')">✋ Paper</button><button class="btn" onclick="playRPS('scissors')">✌️ Scissors</button></div><div class="score" id="rpsMsg">Choose one.</div><p class="tiny" id="rpsScore">Wins: 0 | Losses: 0 | Ties: 0</p></div></div>
+      <div class="game" id="rps"><h3>✊ Rock Paper Scissors Shoot The classic</h3><p>Beat the computer.</p><div class="game-area"><div class="button-row"><button class="btn" onclick="playRPS('rock')">✊ Rock</button><button class="btn" onclick="playRPS('paper')">✋ Paper</button><button class="btn" onclick="playRPS('scissors')">✌️ Scissors</button></div><div class="score" id="rpsMsg">Choose one.</div><p class="tiny" id="rpsScore">Wins: 0 | Losses: 0 | Ties: 0</p></div></div>
       <div class="game" id="math"><h3>🧮 Math Speed</h3><p>Solve the math problem.</p><div class="game-area"><div class="score" id="mathQuestion">Loading...</div><input id="mathAnswer" type="number" placeholder="Answer"><button class="btn primary" onclick="checkMath()">Submit</button><button class="btn" onclick="newMath()">New Problem</button><p class="tiny" id="mathScore">Correct: 0</p></div></div>
       <div class="game" id="typing"><h3>⌨️ Typing Challenge</h3><p>Type the phrase exactly.</p><div class="game-area"><div class="score" id="typingPhrase">future coder</div><input id="typingInput" placeholder="Type here" oninput="checkTyping()"><p class="tiny" id="typingMsg">Start typing.</p><button class="btn" onclick="newTyping()">New Phrase</button></div></div>
       <div class="game" id="maze"><h3>🧩 Maze Escape</h3><p>Use the arrow buttons to reach the green exit.</p><div class="game-area"><div class="maze" id="mazeGrid"></div><br><div class="button-row"><button class="btn" onclick="moveMaze(0,-1)">⬆️</button><button class="btn" onclick="moveMaze(-1,0)">⬅️</button><button class="btn" onclick="moveMaze(1,0)">➡️</button><button class="btn" onclick="moveMaze(0,1)">⬇️</button></div><p class="tiny" id="mazeMsg">Escape the maze.</p></div></div>
@@ -155,7 +155,7 @@
     </div>
   </section>
 
-  <footer>Made by Andrew © 2026 • One file multi-page website</footer>
+  <footer>Made by Andrew © 2026 • One file multi-page website send this to your friends</footer>
 
   <script>
     function showPage(id){
